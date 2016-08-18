@@ -1,0 +1,50 @@
+﻿@model ExamenMVCAjax.Entities.FacturaProducto
+
+<table class="table">
+    <tr>
+        <th>
+            Cantidad
+        </th>
+        <th>
+            Código
+        </th>
+        <th>
+            Descripción
+        </th>
+        <th>
+            Precio
+        </th>
+        <th>
+            Acción
+        </th>
+    </tr>
+    @foreach (var item in Model.Productos)
+    {
+        <tr>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.Cantidad)*@
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Codigo)
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.Descripcion)*@
+            </td>
+            <td>
+                @Ajax.ActionLink("Delete", "DeleteCommentPlace", "Places", new
+           {
+               factura = Model.Factura.Id,
+               producto = item.Id,
+           },
+                    new AjaxOptions
+                    {
+                        HttpMethod = "POST",
+                        InsertionMode = InsertionMode.Replace,
+                        UpdateTargetId = "contenido",
+                        AllowCache = false
+                    })
+            </td>
+        </tr>
+    }
+
+</table>
